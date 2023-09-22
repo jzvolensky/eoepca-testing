@@ -1,0 +1,14 @@
+# This file contains the configuration for the test suite
+
+# ADES configuration options
+# Default values are for the demo platform
+# Change these values to run the test suite on a different platform
+
+base_domain: "192.168.49.2.nip.io"
+#base_domain: "demo.eoepca.org"
+platform_domain: "auth.demo.eoepca.org"
+#platform_domain: ""
+base_url: "https://auth.192.168.49.2.nip.io"
+USER_NAME: "eric"
+USER_PASSWORD: "defaultPWD"
+S3_ENDPOINT: "https://minio.demo.eoepca.org"
