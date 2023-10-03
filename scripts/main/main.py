@@ -4,14 +4,13 @@ import sys
 import os
 import logging
 
-# TODO:Find a way to make this better and more streamlined
 relative_paths = ["../utils", "../processing", "../resource_catalogue", "../component_actions"]
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.extend(os.path.join(current_dir, rel_path) for rel_path in relative_paths)
 
-from ades import List_Processes
 from utils import Load_Config, Setup_Urls
 from component_actions import component_actions
+
 
 
 def main():

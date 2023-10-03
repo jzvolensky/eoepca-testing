@@ -1,23 +1,15 @@
 import sys
 import os
 import logging
+
+relative_paths = ["../utils", "../processing", "../resource_catalogue", "../component_actions"]
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.extend(os.path.join(current_dir, rel_path) for rel_path in relative_paths)
+
 from ades import List_Processes
 from utils import Load_Config, Setup_Urls
 
-# TODO:Find a way to make this better and more streamlined
-current_dir = os.path.dirname(os.path.abspath(__file__))
-
-utils_path = os.path.join(current_dir, "../utils")
-processing_path = os.path.join(current_dir, "../processing")
-resource_catalogue_path = os.path.join(current_dir, "../resource_catalogue")
-
-sys.path.append(utils_path)
-sys.path.append(processing_path)
-sys.path.append(resource_catalogue_path)
-
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-
 
 def Run_Ades_Tests():
     config, base_domain, base_url, platform_domain, user_name, user_password = Load_Config()
