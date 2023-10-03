@@ -15,7 +15,7 @@ from component_actions import component_actions
 
 
 def main():
-    config = Load_Config()
+    config, *_ = Load_Config()
     
     selected_components = config.get("components", [])
     
@@ -27,6 +27,7 @@ def main():
             logging.warning(f"No action defined for component: {component}")
 
         
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     main()
