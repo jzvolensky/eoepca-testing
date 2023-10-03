@@ -1,9 +1,13 @@
 import os
 import yaml
 import pprint
+import logging
 
 # Collection of universal helper functions for the scripts
+
 pp = pprint.PrettyPrinter(indent=4)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 def Load_Config():
     '''
     Function to load config file
@@ -15,17 +19,19 @@ def Load_Config():
 
     config_path = os.path.join(current_dir, '..', 'config', 'default_config.yaml')
 
-    print('LOADING CONFIG')
+    logging.info("Loading config file")
+    
     if os.path.isfile('custom_config.yaml'):
         config_file = open('custom_config.yaml', 'r')
         config = yaml.safe_load(config_file)
-        print(f'CUSTOM CONFIG LOADED: {config}')
+
+        logging.info("CUSTOM CONFIG LOADED")
         config_file.close()
     else:
         config_file = open(config_path, 'r')
         config = yaml.safe_load(config_file)
-        print('DEFAULT CONFIG LOADED')
-        pp.pprint(config)
+
+        logging.info("DEFAULT CONFIG LOADED")
         config_file.close()
 
     base_domain = config['base_domain']
@@ -39,10 +45,11 @@ def Load_Config():
 def Setup_Urls(base_domain, user_name):
 
     ades_base_url = "http://ades-open." + base_domain
-    ades_wps_url = ades_base_url + "/" + user_name + "/zoo"; print("ADES WPS endpoint:", ades_wps_url)
-    ades_proc_url = ades_base_url + "/" + "_run/wps3"; print("ADES API Processes endpoint:", ades_proc_url)
-    print(ades_wps_url)
-    print(ades_proc_url)
-    print("ADES urls retrieved")
+    ades_wps_url = ades_base_url + "/" + user_name + "/zoo"
+    ades_proc_url = ades_base_url + "/" + "_run/wps3"
+
+    logging.info(f'ADES processes URL: {ades_proc_url}')
+    logging.info(f'ADES WPS URL: {ades_wps_url}')
+    
 
     return ades_proc_url, ades_wps_url

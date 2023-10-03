@@ -10,4 +10,7 @@ base_url: "http://auth.192-168-49-2.nip.io"
 USER_NAME: "eric"
 USER_PASSWORD: "defaultPWD"
 S3_ENDPOINT: "http://minio.demo.eoepca.org"
+components:
+  - ades
+  - resource_catalogue
 

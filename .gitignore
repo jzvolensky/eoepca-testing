@@ -1,1 +1,3 @@
 eoepca-testing-env/
+.vscode/
+__pycache__/
