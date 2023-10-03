@@ -4,17 +4,10 @@ import os
 import sys
 import logging
 
-# Get the path to the current directory (main_folder)
+
+relative_paths = ["../utils", "../processing", "../resource_catalogue"]
 current_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Add the paths to the 'utils', 'processing', and 'resource_catalogue' folders to sys.path
-utils_path = os.path.join(current_dir, "../utils")
-processing_path = os.path.join(current_dir, "../processing")
-resource_catalogue_path = os.path.join(current_dir, "../resource_catalogue")
-
-sys.path.append(utils_path)
-sys.path.append(processing_path)
-sys.path.append(resource_catalogue_path)
+sys.path.extend(os.path.join(current_dir, rel_path) for rel_path in relative_paths)
 
 pp = pprint.PrettyPrinter(indent=4)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
