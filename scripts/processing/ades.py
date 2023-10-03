@@ -10,7 +10,7 @@ import yaml
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Assuming verify_ades_config.yaml is in the same directory as the script
-config_file_path = os.path.join(current_dir, "verify_ades_config.yaml")
+config_file_path = os.path.join(current_dir, "ades_default_config.yaml")
 
 # Now you can open the config file
 with open(config_file_path, 'r') as stream:
