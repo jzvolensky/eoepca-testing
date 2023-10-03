@@ -1,4 +1,4 @@
-pyyaml==5.3.1
+pyyaml==5.4
 awscli==1.19.53
 boto3==1.17.53
 bs4==0.0.1
@@ -7,7 +7,7 @@ folium==0.12.1
 geolinks==0.2.0
 ipyleaflet==0.17.1
 jsonschema==3.2.0
-lxml==4.6.3
+lxml==4.9.1
 matplotlib==3.7.1
 OWSLib @ git+https://github.com/geopython/OWSLib@792fa034dc3f44af8fea62477d71466ca3d3a06b
 pycrypto==2.6.1
