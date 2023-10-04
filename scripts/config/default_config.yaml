@@ -5,6 +5,7 @@
 # Change these values to run the test suite on a different platform
 
 base_domain: "192-168-49-2.nip.io"
+#base_domain: "demo.eoepca.org"
 platform_domain: "auth.demo.eoepca.org"
 base_url: "http://auth.192-168-49-2.nip.io"
 USER_NAME: "eric"
