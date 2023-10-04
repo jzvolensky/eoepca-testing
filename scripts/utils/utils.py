@@ -8,13 +8,17 @@ import logging
 pp = pprint.PrettyPrinter(indent=4)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+
+
 def Load_Config():
     '''
     Function to load config file
     If custom config is not present in the root directory
     uses the default values (from deployment guide)
-
     '''
+    
+    global config, base_domain, base_url, platform_domain, user_name, user_password
+
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     config_path = os.path.join(current_dir, '..', 'config', 'default_config.yaml')
@@ -39,8 +43,10 @@ def Load_Config():
     platform_domain = config['platform_domain']
     user_name = config['USER_NAME']
     user_password = config['USER_PASSWORD']
-    
-    return config, base_domain, base_url, platform_domain, user_name, user_password
+
+    return config if isinstance(config, dict) else dict(config)
+
+config = Load_Config()
 
 def Setup_Urls(base_domain, user_name):
 

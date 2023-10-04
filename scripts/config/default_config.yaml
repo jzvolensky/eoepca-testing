@@ -9,6 +9,7 @@ platform_domain: "auth.demo.eoepca.org"
 base_url: "http://auth.192-168-49-2.nip.io"
 USER_NAME: "eric"
 USER_PASSWORD: "defaultPWD"
+workspace_prefix: "demo-user"
 S3_ENDPOINT: "http://minio.demo.eoepca.org"
 components:
   - ades

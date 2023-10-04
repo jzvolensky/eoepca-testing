@@ -1,5 +1,3 @@
-import importlib
-import yaml
 import sys
 import os
 import logging
@@ -8,13 +6,11 @@ relative_paths = ["../utils", "../processing", "../resource_catalogue", "../comp
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.extend(os.path.join(current_dir, rel_path) for rel_path in relative_paths)
 
-from utils import Load_Config, Setup_Urls
+from utils import Load_Config
 from component_actions import component_actions
-
-
+from utils import config
 
 def main():
-    config, *_ = Load_Config()
     
     selected_components = config.get("components", [])
     

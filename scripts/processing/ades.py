@@ -29,7 +29,3 @@ def List_Processes(ades_proc_url):
     
     return response_json
 
-if __name__ == "__main__":
-    config, base_domain, base_url, platform_domain, user_name, user_password = Load_Config()
-    ades_proc_url, ades_wps_url = Setup_Urls(base_domain, user_name)
-    List_Processes(ades_proc_url)
