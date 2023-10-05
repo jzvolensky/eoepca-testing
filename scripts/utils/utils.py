@@ -6,8 +6,17 @@ import logging
 # Collection of universal helper functions for the scripts
 
 pp = pprint.PrettyPrinter(indent=4)
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+class ComponentAdapter(logging.LoggerAdapter):
+    def process(self, msg, kwargs):
+        return f"[{self.extra['component']}] {msg}", kwargs
+
+logger = logging.getLogger(__name__)
+config_logger = ComponentAdapter(logger, {'component': 'config'})
+ades_logger = ComponentAdapter(logger, {'component': 'ades'})
+rc_logger = ComponentAdapter(logger, {'component': 'resource_catalogue'})
 
 
 def Load_Config():
@@ -23,19 +32,22 @@ def Load_Config():
 
     config_path = os.path.join(current_dir, '..', 'config', 'default_config.yaml')
 
-    logging.info("Loading config file")
+    logger = logging.getLogger(__name__)
+    component_logger = ComponentAdapter(logger, {'component': 'config_setup'})
+
+    component_logger.info("Loading config file")
     
     if os.path.isfile('custom_config.yaml'):
         config_file = open('custom_config.yaml', 'r')
         config = yaml.safe_load(config_file)
 
-        logging.info("CUSTOM CONFIG LOADED")
+        component_logger.info("CUSTOM CONFIG LOADED")
         config_file.close()
     else:
         config_file = open(config_path, 'r')
         config = yaml.safe_load(config_file)
 
-        logging.info("DEFAULT CONFIG LOADED")
+        component_logger.info("DEFAULT CONFIG LOADED")
         config_file.close()
 
     base_domain = config['base_domain']
@@ -54,8 +66,5 @@ def Setup_Urls(base_domain, user_name):
     ades_wps_url = ades_base_url + "/" + user_name + "/zoo"
     ades_proc_url = ades_base_url + "/" + "_run/wps3"
 
-    logging.info(f'ADES processes URL: {ades_proc_url}')
-    logging.info(f'ADES WPS URL: {ades_wps_url}')
-    
-
     return ades_proc_url, ades_wps_url
+

@@ -13,9 +13,7 @@ relative_paths = ["../utils", "../processing", "../resource_catalogue"]
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.extend(os.path.join(current_dir, rel_path) for rel_path in relative_paths)
 
-from utils import config
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+from utils import config, rc_logger
 
 def List_Records():
     '''
@@ -26,10 +24,10 @@ def List_Records():
 
     catalogue_endpoint = f'http://resource-catalogue-open.{base_domain}/csw'
 
+    rc_logger.info(f'Connecting to catalogue endpoint: {catalogue_endpoint}')
 
-    print(catalogue_endpoint)
-    csw = CatalogueServiceWeb(catalogue_endpoint, timeout=30)
+    csw = CatalogueServiceWeb(catalogue_endpoint, timeout=30, skip_caps=True)
 
-    logging.info(f"Connected to catalogue endpoint: {catalogue_endpoint}")
-    logging.info(csw.version)
+    rc_logger.info(f"Connected to catalogue endpoint: {catalogue_endpoint}")
+    rc_logger.info(f'CSW version: {csw.version}')
 
