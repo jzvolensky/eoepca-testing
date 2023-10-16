@@ -24,8 +24,6 @@ def run_ades_tests():
     ades_proc_url, ades_wps_url = setup_urls(base_domain, user_name)
     list_processes(ades_proc_url)
 
-    
-
 def run_resource_catalogue_tests():
     logging.info("Running Resource Catalogue tests...")
     base_domain = config['base_domain']
