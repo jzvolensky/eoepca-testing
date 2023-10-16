@@ -12,14 +12,30 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 class ComponentAdapter(logging.LoggerAdapter):
     def process(self, msg, kwargs):
         return f"[{self.extra['component']}] {msg}", kwargs
+    
+def create_logger(logger_name, component_name, log_file):
+    logger = logging.getLogger(logger_name)
+    component_logger = ComponentAdapter(logger, {'component': component_name})
 
-logger = logging.getLogger(__name__)
-config_logger = ComponentAdapter(logger, {'component': 'config'})
-ades_logger = ComponentAdapter(logger, {'component': 'ades'})
-rc_logger = ComponentAdapter(logger, {'component': 'resource_catalogue'})
+    root_logger = logging.getLogger()
+    if not root_logger.handlers:
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setLevel(logging.INFO)
+        file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+        root_logger.addHandler(file_handler)
 
+    return component_logger
 
-def Load_Config():
+log_file = 'logfile.log'
+main_logger = create_logger(__name__, 'main', log_file)
+config_logger = create_logger(__name__, 'config', log_file)
+ades_logger = create_logger(__name__, 'ades', log_file)
+rc_logger = create_logger(__name__, 'resource_catalogue', log_file)
+das_logger = create_logger(__name__, 'data_access_services', log_file)
+ls_logger = create_logger(__name__, 'login_service', log_file)
+ws_logger = create_logger(__name__, 'workspace', log_file)
+
+def load_config():
     '''
     Function to load config file
     If custom config is not present in the root directory
@@ -58,9 +74,9 @@ def Load_Config():
 
     return config if isinstance(config, dict) else dict(config)
 
-config = Load_Config()
+config = load_config()
 
-def Setup_Urls(base_domain, user_name):
+def setup_urls(base_domain, user_name):
 
     ades_base_url = "http://ades-open." + base_domain
     ades_wps_url = ades_base_url + "/" + user_name + "/zoo"

@@ -15,4 +15,7 @@ S3_ENDPOINT: "http://minio.demo.eoepca.org"
 components:
   - ades
   - resource_catalogue
+  - data_access_services
+  - login_service
+  - workspace
 

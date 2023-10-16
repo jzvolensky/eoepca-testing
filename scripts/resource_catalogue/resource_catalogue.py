@@ -15,7 +15,7 @@ sys.path.extend(os.path.join(current_dir, rel_path) for rel_path in relative_pat
 
 from utils import config, rc_logger
 
-def List_Records():
+def list_records():
     '''
     Function to list records from the resource catalogue
     '''

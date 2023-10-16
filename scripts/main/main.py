@@ -2,17 +2,19 @@ import sys
 import os
 import logging
 
-relative_paths = ["../utils", "../processing", "../resource_catalogue", "../component_actions"]
+relative_paths = ["../utils", "../processing", "../resource_catalogue","../workspace", "../login_service", "../data_access_services", "../component_actions"]
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.extend(os.path.join(current_dir, rel_path) for rel_path in relative_paths)
 
-from utils import Load_Config
+from utils import load_config
 from component_actions import component_actions
-from utils import config
+from utils import config, main_logger
 
 def main():
     
     selected_components = config.get("components", [])
+
+    main_logger.info(f"Running tests for components: {selected_components}")
     
     for component in selected_components:
         if component in component_actions:
